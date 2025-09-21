@@ -1,16 +1,16 @@
 class Solution {
     public long maxTotalValue(int[] nums, int k) {
-        int[] rai=nums;
+        int[] r=nums;
         int max=Integer.MIN_VALUE;
         int min=Integer.MAX_VALUE;
-        for(int i=0;i<rai.length;i++){
+        for(int i=0;i<r.length;i++){
             if(nums[i]>max){
-                max=rai[i];
+                max=r[i];
             }if(nums[i]<min){
-                min=rai[i];
+                min=r[i];
             }
         }long highSum=(long)max-(long)min;
         return highSum*k;
         
     }
-}©leetcode
+}
