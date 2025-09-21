@@ -1,0 +1,47 @@
+import java.util.*;
+
+class Solution {
+    public int minSplitMerge(int[] nums1, int[] nums2) {
+        int[] rLO = nums1;
+        int n = nums1.length;
+        int[] GoaL = nums2;
+        Set<String> Mm = new HashSet<>();
+        Queue<int[]> q = new LinkedList<>();
+        q.add(rLO);
+        Mm.add(Arrays.toString(rLO));
+        int BB = 0;
+
+        while (!q.isEmpty()) {
+            int size = q.size();
+            for (int s = 0; s < size; s++) {
+                int[] cur = q.poll();
+                if (Arrays.equals(cur, GoaL)) return BB;
+
+                for (int l = 0; l < n; l++) {
+                    for (int r = l; r < n; r++) {
+                        int[] art = Arrays.copyOfRange(cur, l, r + 1);
+                        int[] to = new int[n - art.length];
+                        int idx = 0;
+                        for (int i = 0; i < n; i++) if (i < l || i > r) to[idx++] = cur[i];
+
+                        for (int pos = 0; pos <= to.length; pos++) {
+                            int[] ahu = new int[n];
+                            idx = 0;
+                            for (int i = 0; i < pos; i++) ahu[idx++] = to[i];
+                            for (int x : art) ahu[idx++] = x;
+                            for (int i = pos; i < to.length; i++) ahu[idx++] = to[i];
+                            String key = Arrays.toString(ahu);
+                            if (!Mm.contains(key)) {
+                                Mm.add(key);
+                                q.add(ahu);
+                            }
+                        }
+                    }
+                }
+            }
+            BB++;
+        }
+        return -1;
+    }
+}
+©leetcode
